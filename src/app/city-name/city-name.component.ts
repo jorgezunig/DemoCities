@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { FilterdataPipe } from '../filterdata.pipe';
 
 @Component({
   selector: 'app-city-name',
   templateUrl: './city-name.component.html',
-  styleUrls: ['./city-name.component.css']
+  styleUrls: ['./city-name.component.scss'],
 })
 
-export class CityNameComponent {
+export class CityNameComponent implements OnInit {
+  lista: any = [];
+  listName = [];
+  totalItems: number;
 
-  lista = [
-    { id: '1', name: 'jorge', color: 'rojo', edad: '27' },
-    { id: '2', name: 'ana', color: 'verde', edad: '22' },
-    { id: '3', name: 'maria', color: 'rojo', edad: '27' },
-    { id: '4', name: 'toño', color: 'azul', edad: '22' },
-    { id: '5', name: 'pepe', color: 'rojo', edad: '27' }
-  ];
+  constructor(private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.http.get('https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json')
+      .subscribe(ciudad => {
+        this.lista = ciudad;
+        this.listName = this.lista.slice(1, 3000);
+      })
+  }
 
 
 }
