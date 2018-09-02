@@ -19,7 +19,7 @@ export class CityNameComponent implements OnInit {
     this.http.get('https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json')
       .subscribe(ciudad => {
         this.lista = ciudad;
-        this.listName = this.lista.slice(1, 3000);
+        this.listName = this.lista.slice(0, 20000);
       })
   }
 
